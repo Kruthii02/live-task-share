@@ -1,19 +1,25 @@
 
+import { motion } from 'framer-motion';
 import { User, Settings, LogOut } from 'lucide-react';
-import ThemeToggle from './ThemeToggle';
+import AnimatedThemeToggle from './AnimatedThemeToggle';
 
 const TodoHeader = ({ user }) => {
   return (
-    <header style={{
-      background: 'var(--surface-color)',
-      backdropFilter: 'blur(10px)',
-      borderBottom: `1px solid var(--border-color)`,
-      padding: '16px 0',
-      position: 'sticky',
-      top: '0',
-      zIndex: 100,
-      transition: 'all 0.3s ease'
-    }}>
+    <motion.header
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      style={{
+        background: 'rgba(255, 255, 255, 0.1)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255,255,255,0.2)',
+        padding: '16px 0',
+        position: 'sticky',
+        top: '0',
+        zIndex: 100,
+        transition: 'all 0.3s ease'
+      }}
+    >
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
@@ -23,90 +29,125 @@ const TodoHeader = ({ user }) => {
         padding: '0 20px'
       }}>
         
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: `linear-gradient(45deg, var(--primary-color), var(--accent-color))`,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'white',
-            fontWeight: 'bold'
-          }}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+          style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+        >
+          <motion.div
+            whileHover={{ rotate: 360, scale: 1.1 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              width: '48px',
+              height: '48px',
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))',
+              backdropFilter: 'blur(10px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '20px',
+              border: '2px solid rgba(255,255,255,0.2)',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+            }}
+          >
             T
-          </div>
-          <h1 style={{
-            fontSize: '28px',
-            fontWeight: 'bold',
-            color: 'var(--text-color)',
-            margin: '0'
-          }}>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            style={{
+              fontSize: '32px',
+              fontWeight: 'bold',
+              color: 'white',
+              margin: '0',
+              textShadow: '0 2px 10px rgba(0,0,0,0.2)'
+            }}
+          >
             CollabTodo
-          </h1>
-        </div>
+          </motion.h1>
+        </motion.div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4 }}
+          style={{ display: 'flex', alignItems: 'center', gap: '16px' }}
+        >
           {user && (
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '12px',
-              padding: '8px 16px',
-              background: 'var(--bg-color)',
-              borderRadius: '25px',
-              border: `1px solid var(--border-color)`
-            }}>
-              <User size={20} color="var(--text-secondary-color)" />
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '12px',
+                padding: '12px 20px',
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '25px',
+                border: '1px solid rgba(255,255,255,0.2)',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+              }}
+            >
+              <User size={20} color="rgba(255,255,255,0.8)" />
               <span style={{ 
-                color: 'var(--text-color)', 
+                color: 'white', 
                 fontWeight: '500',
                 fontSize: '14px'
               }}>
                 {user.name || 'User'}
               </span>
-            </div>
+            </motion.div>
           )}
           
-          <ThemeToggle />
+          <AnimatedThemeToggle />
           
-          <button style={{
-            background: 'none',
-            border: 'none',
-            padding: '8px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            transition: 'background-color 0.2s',
-            color: 'var(--text-secondary-color)'
-          }}
-          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = 'var(--bg-color)'}
-          onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
+          <motion.button
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid rgba(255,255,255,0.2)',
+              padding: '12px',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'rgba(255,255,255,0.8)',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+              transition: 'all 0.3s ease'
+            }}
           >
             <Settings size={20} />
-          </button>
+          </motion.button>
           
-          <button style={{
-            background: 'none',
-            border: 'none',
-            padding: '8px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            transition: 'background-color 0.2s',
-            color: 'var(--error-color)'
-          }}
-          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = 'var(--bg-color)'}
-          onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
+          <motion.button
+            whileHover={{ scale: 1.1, rotate: -5 }}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '2px solid rgba(255,255,255,0.2)',
+              padding: '12px',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              color: 'rgba(255,82,82,0.8)',
+              boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+              transition: 'all 0.3s ease'
+            }}
           >
             <LogOut size={20} />
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
