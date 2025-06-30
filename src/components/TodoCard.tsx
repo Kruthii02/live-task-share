@@ -233,8 +233,8 @@ const TodoCard = ({ task, onToggleComplete, onUpdate, onDelete }) => {
                       color: '#4a5568',
                       transition: 'background-color 0.2s'
                     }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = '#edf2f7'}
-                    onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'}
+                    onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#edf2f7'}
+                    onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
                   >
                     <Edit size={14} />
                   </button>
@@ -250,8 +250,8 @@ const TodoCard = ({ task, onToggleComplete, onUpdate, onDelete }) => {
                       color: '#e53e3e',
                       transition: 'background-color 0.2s'
                     }}
-                    onMouseOver={(e) => e.target.style.backgroundColor = '#fed7d7'}
-                    onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'}
+                    onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#fed7d7'}
+                    onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
                   >
                     <Trash2 size={14} />
                   </button>

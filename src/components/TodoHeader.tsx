@@ -77,8 +77,8 @@ const TodoHeader = ({ user }) => {
             alignItems: 'center',
             transition: 'background-color 0.2s'
           }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#f7fafc'}
-          onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'}
+          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#f7fafc'}
+          onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
           >
             <Settings size={20} color="#4a5568" />
           </button>
@@ -93,8 +93,8 @@ const TodoHeader = ({ user }) => {
             alignItems: 'center',
             transition: 'background-color 0.2s'
           }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#fed7d7'}
-          onMouseOut={(e) => e.target.style.backgroundColor = 'transparent'}
+          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#fed7d7'}
+          onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
           >
             <LogOut size={20} color="#e53e3e" />
           </button>

@@ -41,12 +41,12 @@ const TodoFilters = ({ currentFilter, onFilterChange, taskCounts }) => {
             }}
             onMouseOver={(e) => {
               if (currentFilter !== filter.key) {
-                e.target.style.backgroundColor = '#edf2f7';
+                (e.target as HTMLElement).style.backgroundColor = '#edf2f7';
               }
             }}
             onMouseOut={(e) => {
               if (currentFilter !== filter.key) {
-                e.target.style.backgroundColor = '#f7fafc';
+                (e.target as HTMLElement).style.backgroundColor = '#f7fafc';
               }
             }}
           >
