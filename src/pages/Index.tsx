@@ -67,8 +67,9 @@ const Index = () => {
   return (
     <div style={{ 
       minHeight: '100vh', 
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      padding: '0'
+      background: `linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%)`,
+      padding: '0',
+      transition: 'all 0.3s ease'
     }}>
       <TodoHeader user={user} />
       
@@ -83,11 +84,13 @@ const Index = () => {
         
         {/* Left Sidebar */}
         <div style={{
-          background: 'white',
+          background: 'var(--surface-color)',
           borderRadius: '12px',
           padding: '24px',
           height: 'fit-content',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+          boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+          border: `1px solid var(--border-color)`,
+          transition: 'all 0.3s ease'
         }}>
           <TodoForm onSubmit={addTask} />
           <div style={{ margin: '24px 0' }}>
@@ -106,23 +109,25 @@ const Index = () => {
 
         {/* Main Content */}
         <div style={{
-          background: 'white',
+          background: 'var(--surface-color)',
           borderRadius: '12px',
           padding: '24px',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
+          boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+          border: `1px solid var(--border-color)`,
+          transition: 'all 0.3s ease'
         }}>
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             marginBottom: '20px',
-            borderBottom: '2px solid #f0f0f0',
+            borderBottom: `2px solid var(--border-color)`,
             paddingBottom: '16px'
           }}>
             <h2 style={{
               fontSize: '24px',
               fontWeight: 'bold',
-              color: '#2d3748',
+              color: 'var(--text-color)',
               margin: '0'
             }}>
               Your Tasks ({filteredTasks.length})

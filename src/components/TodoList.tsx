@@ -6,38 +6,17 @@ const TodoList = ({ tasks, onToggleComplete, onUpdate, onDelete }) => {
     return (
       <div style={{
         textAlign: 'center',
-        padding: '60px 20px',
-        color: '#a0aec0'
+        padding: '40px 20px',
+        color: 'var(--text-secondary-color)'
       }}>
-        <div style={{
-          fontSize: '48px',
-          marginBottom: '16px'
-        }}>
-          📝
-        </div>
-        <h3 style={{
-          fontSize: '18px',
-          fontWeight: '600',
-          marginBottom: '8px'
-        }}>
-          No tasks found
-        </h3>
-        <p style={{ fontSize: '14px' }}>
-          Create your first task to get started!
-        </p>
+        <p style={{ fontSize: '16px', margin: '0' }}>No tasks found</p>
+        <p style={{ fontSize: '14px', margin: '8px 0 0 0' }}>Create your first task to get started!</p>
       </div>
     );
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '12px',
-      maxHeight: '600px',
-      overflowY: 'auto',
-      paddingRight: '8px'
-    }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {tasks.map(task => (
         <TodoCard
           key={task.id}

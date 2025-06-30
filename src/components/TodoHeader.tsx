@@ -1,16 +1,18 @@
 
 import { User, Settings, LogOut } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const TodoHeader = ({ user }) => {
   return (
     <header style={{
-      background: 'rgba(255, 255, 255, 0.95)',
+      background: 'var(--surface-color)',
       backdropFilter: 'blur(10px)',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+      borderBottom: `1px solid var(--border-color)`,
       padding: '16px 0',
       position: 'sticky',
       top: '0',
-      zIndex: 100
+      zIndex: 100,
+      transition: 'all 0.3s ease'
     }}>
       <div style={{
         maxWidth: '1200px',
@@ -26,7 +28,7 @@ const TodoHeader = ({ user }) => {
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            background: 'linear-gradient(45deg, #667eea, #764ba2)',
+            background: `linear-gradient(45deg, var(--primary-color), var(--accent-color))`,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -38,7 +40,7 @@ const TodoHeader = ({ user }) => {
           <h1 style={{
             fontSize: '28px',
             fontWeight: 'bold',
-            color: '#2d3748',
+            color: 'var(--text-color)',
             margin: '0'
           }}>
             CollabTodo
@@ -52,13 +54,13 @@ const TodoHeader = ({ user }) => {
               alignItems: 'center', 
               gap: '12px',
               padding: '8px 16px',
-              background: '#f7fafc',
+              background: 'var(--bg-color)',
               borderRadius: '25px',
-              border: '1px solid #e2e8f0'
+              border: `1px solid var(--border-color)`
             }}>
-              <User size={20} color="#4a5568" />
+              <User size={20} color="var(--text-secondary-color)" />
               <span style={{ 
-                color: '#2d3748', 
+                color: 'var(--text-color)', 
                 fontWeight: '500',
                 fontSize: '14px'
               }}>
@@ -66,6 +68,8 @@ const TodoHeader = ({ user }) => {
               </span>
             </div>
           )}
+          
+          <ThemeToggle />
           
           <button style={{
             background: 'none',
@@ -75,12 +79,13 @@ const TodoHeader = ({ user }) => {
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            transition: 'background-color 0.2s'
+            transition: 'background-color 0.2s',
+            color: 'var(--text-secondary-color)'
           }}
-          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#f7fafc'}
+          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = 'var(--bg-color)'}
           onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
           >
-            <Settings size={20} color="#4a5568" />
+            <Settings size={20} />
           </button>
           
           <button style={{
@@ -91,12 +96,13 @@ const TodoHeader = ({ user }) => {
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            transition: 'background-color 0.2s'
+            transition: 'background-color 0.2s',
+            color: 'var(--error-color)'
           }}
-          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = '#fed7d7'}
+          onMouseOver={(e) => (e.target as HTMLElement).style.backgroundColor = 'var(--bg-color)'}
           onMouseOut={(e) => (e.target as HTMLElement).style.backgroundColor = 'transparent'}
           >
-            <LogOut size={20} color="#e53e3e" />
+            <LogOut size={20} />
           </button>
         </div>
       </div>
