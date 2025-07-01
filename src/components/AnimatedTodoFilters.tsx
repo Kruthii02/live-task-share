@@ -54,7 +54,6 @@ const AnimatedTodoFilters = ({ currentFilter, onFilterChange, taskCounts }) => {
               justifyContent: 'space-between',
               alignItems: 'center',
               padding: '16px 20px',
-              border: 'none',
               borderRadius: '12px',
               background: currentFilter === filter.key 
                 ? 'linear-gradient(135deg, var(--primary-color), var(--accent-color))' 
