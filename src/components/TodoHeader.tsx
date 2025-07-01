@@ -1,9 +1,21 @@
 
 import { motion } from 'framer-motion';
 import { User, Settings, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AnimatedThemeToggle from './AnimatedThemeToggle';
 
-const TodoHeader = ({ user }) => {
+const TodoHeader = () => {
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  const getInitials = (name: string) => {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+  };
+
   return (
     <motion.header
       initial={{ opacity: 0, y: -20 }}
@@ -93,13 +105,19 @@ const TodoHeader = ({ user }) => {
                 boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
               }}
             >
-              <User size={20} color="rgba(255,255,255,0.8)" />
+              <Avatar style={{ width: '32px', height: '32px' }}>
+                <AvatarImage src={user.user_metadata?.avatar_url} />
+                <AvatarFallback style={{ background: 'rgba(255,255,255,0.2)', color: 'white', fontSize: '12px' }}>
+                  {user.user_metadata?.full_name ? getInitials(user.user_metadata.full_name) : 
+                   user.email ? user.email[0].toUpperCase() : 'U'}
+                </AvatarFallback>
+              </Avatar>
               <span style={{ 
                 color: 'white', 
                 fontWeight: '500',
                 fontSize: '14px'
               }}>
-                {user.name || 'User'}
+                {user.user_metadata?.full_name || user.email}
               </span>
             </motion.div>
           )}
@@ -129,6 +147,7 @@ const TodoHeader = ({ user }) => {
           <motion.button
             whileHover={{ scale: 1.1, rotate: -5 }}
             whileTap={{ scale: 0.9 }}
+            onClick={handleSignOut}
             style={{
               background: 'rgba(255,255,255,0.1)',
               backdropFilter: 'blur(10px)',

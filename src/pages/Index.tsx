@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useAuth } from '@/contexts/AuthContext';
 import TodoHeader from '../components/TodoHeader';
 import AnimatedTodoForm from '../components/AnimatedTodoForm';
 import AnimatedTodoList from '../components/AnimatedTodoList';
@@ -10,12 +11,7 @@ import { toast } from "@/components/ui/sonner";
 const Index = () => {
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
-  const [user, setUser] = useState(null);
-
-  // Mock user for now - will be replaced with Supabase auth
-  useEffect(() => {
-    setUser({ id: 1, name: 'Demo User', email: 'demo@example.com' });
-  }, []);
+  const { user } = useAuth();
 
   const addTask = (taskData) => {
     const newTask = {
@@ -77,7 +73,7 @@ const Index = () => {
         transition: 'all 0.3s ease'
       }}
     >
-      <TodoHeader user={user} />
+      <TodoHeader />
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
