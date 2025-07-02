@@ -1,23 +1,41 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Plus, Sparkles } from 'lucide-react';
+import { Plus, Sparkles, Users } from 'lucide-react';
 
-const AnimatedTodoForm = ({ onSubmit }) => {
+interface AnimatedTodoFormProps {
+  onSubmit: any;
+  taskType: 'personal' | 'shared';
+}
+
+const AnimatedTodoForm = ({ onSubmit, taskType }: AnimatedTodoFormProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [priority, setPriority] = useState('medium');
+  const [dueDate, setDueDate] = useState('');
+  const [sharedWith, setSharedWith] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim()) {
       setIsSubmitting(true);
       await new Promise(resolve => setTimeout(resolve, 300)); // Brief animation delay
-      onSubmit({ title: title.trim(), description: description.trim(), priority });
+      
+      const taskData = {
+        title: title.trim(),
+        description: description.trim(),
+        priority,
+        due_date: dueDate || undefined,
+        shared_with: taskType === 'shared' && sharedWith ? sharedWith.split(',').map(email => email.trim()) : []
+      };
+      
+      onSubmit(taskData);
       setTitle('');
       setDescription('');
       setPriority('medium');
+      setDueDate('');
+      setSharedWith('');
       setIsSubmitting(false);
     }
   };
@@ -42,8 +60,12 @@ const AnimatedTodoForm = ({ onSubmit }) => {
           gap: '8px'
         }}
       >
-        <Sparkles size={20} style={{ color: 'var(--accent-color)' }} />
-        Add New Task
+        {taskType === 'personal' ? (
+          <Sparkles size={20} style={{ color: 'var(--accent-color)' }} />
+        ) : (
+          <Users size={20} style={{ color: 'var(--accent-color)' }} />
+        )}
+        Add New {taskType === 'personal' ? 'Personal' : 'Shared'} Task
       </motion.h3>
       
       <motion.form
@@ -94,6 +116,50 @@ const AnimatedTodoForm = ({ onSubmit }) => {
             boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
           }}
         />
+        
+        {taskType === 'personal' && (
+          <motion.input
+            whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+            type="datetime-local"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+            placeholder="Due date (optional)..."
+            style={{
+              padding: '16px 20px',
+              border: '2px solid transparent',
+              borderRadius: '12px',
+              fontSize: '14px',
+              background: 'rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(10px)',
+              color: 'var(--text-color)',
+              outline: 'none',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+            }}
+          />
+        )}
+        
+        {taskType === 'shared' && (
+          <motion.input
+            whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+            type="text"
+            value={sharedWith}
+            onChange={(e) => setSharedWith(e.target.value)}
+            placeholder="Share with (comma-separated emails)..."
+            style={{
+              padding: '16px 20px',
+              border: '2px solid transparent',
+              borderRadius: '12px',
+              fontSize: '14px',
+              background: 'rgba(255,255,255,0.8)',
+              backdropFilter: 'blur(10px)',
+              color: 'var(--text-color)',
+              outline: 'none',
+              transition: 'all 0.3s ease',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
+            }}
+          />
+        )}
         
         <motion.select
           whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
