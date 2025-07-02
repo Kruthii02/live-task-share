@@ -4,22 +4,16 @@
 
 A full-stack task management application built using the **MERN stack** with real-time features like task collaboration and updates. This application allows users to register, log in, create, update, and delete tasks, and also receive real-time updates on task status via sockets.
 
----
-
 ## 🎥 Demo Videos
 
 - 🔷 **Frontend Demo Video:** [Watch here](https://github.com/Kruthii02/live-task-share/blob/main/Screen%20Recording%202025-07-02%20073933.mp4)
 - 🔷 **Backend Demo Video:** [Watch here](https://github.com/Kruthii02/live-task-share/blob/main/Screen%20Recording%202025-07-02%20074108.mp4)
-
----
 
 ## 🧠 Architecture Diagram
 
 ![Architecture Diagram](https://raw.githubusercontent.com/Kruthii02/live-task-share/main/WhatsApp%20Image%202025-07-01%20at%2016.26.19_453a541b.jpg)
 
 > ✅ Make sure to add the `architecture.png` inside a folder named `assets` in your repo.
-
----
 
 ## ⚙️ Tech Stack
 
@@ -31,7 +25,6 @@ A full-stack task management application built using the **MERN stack** with rea
 **Deployment**: Vercel (Frontend) & Render/Heroku (Backend)  
 **Version Control**: GitHub  
 
----
 
 ## 🔁 Application Workflow
 
@@ -56,7 +49,6 @@ A full-stack task management application built using the **MERN stack** with rea
 - **Backend** is hosted on Render (or any other Node.js hosting platform).
 - Environment variables are managed through `.env` for both frontend and backend.
 
----
 
 ## 📂 Project Structure
 
@@ -93,5 +85,6 @@ Create .env files in both client and server with the required API keys and secre
 🧑‍💻 Author
 Kruthika K
 👩‍💻 Passionate about MERN stack and real-time applications
-📫 LinkedIn | GitHub
-*This project is a part of a hackathon run by [https://www.katomaran.com](https://www.katomaran.com)*
+📫 LinkedIn :www.linkedin.com/in/kruthika-k-ba424a258
+
+*This project is a part of a hackathon run by Katomaran Technologies(https://www.katomaran.com)*
