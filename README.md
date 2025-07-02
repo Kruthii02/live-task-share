@@ -1,73 +1,97 @@
-# Welcome to your Lovable project
+# 📝 Live Task Share - Task Management Web Application
 
-## Project info
+**Live URL:** [https://live-task-share-kruthika-ks-projects.vercel.app](https://live-task-share-kruthika-ks-projects.vercel.app)
 
-**URL**: https://lovable.dev/projects/99b71dee-201b-455a-87c3-25d3eaf9a442
+A full-stack task management application built using the **MERN stack** with real-time features like task collaboration and updates. This application allows users to register, log in, create, update, and delete tasks, and also receive real-time updates on task status via sockets.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🎥 Demo Videos
 
-**Use Lovable**
+- 🔷 **Frontend Demo Video:** [Watch here](https://your-demo-link-frontend.com)
+- 🔷 **Backend Demo Video:** [Watch here](https://your-demo-link-backend.com)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/99b71dee-201b-455a-87c3-25d3eaf9a442) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🧠 Architecture Diagram
 
-**Use your preferred IDE**
+![Architecture Diagram](C:\Users\kruth\Downloads\Architecture.png.jpg)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+> ✅ Make sure to add the `architecture.png` inside a folder named `assets` in your repo.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## ⚙️ Tech Stack
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+**Frontend**: React.js, TailwindCSS, Axios, React Router  
+**Backend**: Node.js, Express.js  
+**Database**: MongoDB  
+**Authentication**: JWT + OAuth (Google)  
+**Real-time Communication**: Socket.IO  
+**Deployment**: Vercel (Frontend) & Render/Heroku (Backend)  
+**Version Control**: GitHub  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+---
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 🔁 Application Workflow
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+### 🧩 1. **Authentication**
+- New users can sign up using email/password or Google OAuth.
+- JWT tokens are used to securely authenticate and authorize users.
 
-**Edit a file directly in GitHub**
+### ✅ 2. **Task Creation & Management**
+- Authenticated users can **create**, **edit**, **delete**, and **mark tasks as complete**.
+- Tasks are stored in MongoDB and fetched using RESTful APIs from the backend.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 🔄 3. **Real-time Task Updates**
+- Socket.IO enables real-time syncing of task updates across multiple clients.
+- When a task is added or modified, all connected clients receive the update instantly.
 
-**Use GitHub Codespaces**
+### 🔐 4. **Role-based Access**
+- Users can manage their tasks privately.
+- (Optional) Admin or shared task boards can be enabled for group collaboration.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### ☁️ 5. **Deployment**
+- **Frontend** is deployed on Vercel.
+- **Backend** is hosted on Render (or any other Node.js hosting platform).
+- Environment variables are managed through `.env` for both frontend and backend.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 📂 Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+📦 root
+├── client/               # React frontend
+│   ├── public/
+│   └── src/
+├── server/               # Node.js backend
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   └── app.js
+├── .env
+├── README.md
+└── package.json
+🛠️ Setup Instructions
+Clone the repository
 
-## How can I deploy this project?
+git clone https://github.com/your-username/live-task-share.git
+Frontend Setup
 
-Simply open [Lovable](https://lovable.dev/projects/99b71dee-201b-455a-87c3-25d3eaf9a442) and click on Share -> Publish.
+cd client
+npm install
+npm start
+Backend Setup
 
-## Can I connect a custom domain to my Lovable project?
+cd server
+npm install
+npm start
+Environment Variables
+Create .env files in both client and server with the required API keys and secrets.
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+🧑‍💻 Author
+Kruthika K
+👩‍💻 Passionate about MERN stack and real-time applications
+📫 LinkedIn | GitHub
+*This project is a part of a hackathon run by [https://www.katomaran.com](https://www.katomaran.com)*
