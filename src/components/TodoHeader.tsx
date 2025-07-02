@@ -21,50 +21,20 @@ const TodoHeader = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      style={{
-        background: 'rgba(255, 255, 255, 0.1)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.2)',
-        padding: '16px 0',
-        position: 'sticky',
-        top: '0',
-        zIndex: 100,
-        transition: 'all 0.3s ease'
-      }}
+      className="bg-white/10 backdrop-blur-md border-b border-white/20 py-3 sm:py-4 sticky top-0 z-50"
     >
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '0 20px'
-      }}>
+      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
         
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+          className="flex items-center gap-2 sm:gap-3"
         >
           <motion.div
             whileHover={{ rotate: 360, scale: 1.1 }}
             transition={{ duration: 0.5 }}
-            style={{
-              width: '48px',
-              height: '48px',
-              borderRadius: '50%',
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1))',
-              backdropFilter: 'blur(10px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '20px',
-              border: '2px solid rgba(255,255,255,0.2)',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-            }}
+            className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-sm flex items-center justify-center text-white font-bold text-sm sm:text-xl border-2 border-white/20 shadow-lg"
           >
             ✓
           </motion.div>
@@ -72,13 +42,7 @@ const TodoHeader = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            style={{
-              fontSize: '32px',
-              fontWeight: 'bold',
-              color: 'white',
-              margin: '0',
-              textShadow: '0 2px 10px rgba(0,0,0,0.2)'
-            }}
+            className="text-xl sm:text-2xl lg:text-3xl font-bold text-white text-shadow-sm"
           >
             TickMate
           </motion.h1>
@@ -88,37 +52,36 @@ const TodoHeader = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '16px' }}
+          className="flex items-center gap-2 sm:gap-4"
         >
           {user && (
             <motion.div
               whileHover={{ scale: 1.05 }}
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '12px',
-                padding: '12px 20px',
-                background: 'rgba(255,255,255,0.1)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '25px',
-                border: '1px solid rgba(255,255,255,0.2)',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-              }}
+              className="hidden sm:flex items-center gap-2 sm:gap-3 py-2 px-3 sm:py-3 sm:px-5 bg-white/10 backdrop-blur-sm rounded-full sm:rounded-3xl border border-white/20 shadow-lg"
             >
-              <Avatar style={{ width: '32px', height: '32px' }}>
+              <Avatar className="w-6 h-6 sm:w-8 sm:h-8">
                 <AvatarImage src={user.user_metadata?.avatar_url} />
-                <AvatarFallback style={{ background: 'rgba(255,255,255,0.2)', color: 'white', fontSize: '12px' }}>
+                <AvatarFallback className="bg-white/20 text-white text-xs sm:text-sm">
                   {user.user_metadata?.full_name ? getInitials(user.user_metadata.full_name) : 
                    user.email ? user.email[0].toUpperCase() : 'U'}
                 </AvatarFallback>
               </Avatar>
-              <span style={{ 
-                color: 'white', 
-                fontWeight: '500',
-                fontSize: '14px'
-              }}>
+              <span className="text-white font-medium text-sm sm:text-base max-w-32 sm:max-w-none truncate">
                 {user.user_metadata?.full_name || user.email}
               </span>
+            </motion.div>
+          )}
+          
+          {/* Mobile avatar only */}
+          {user && (
+            <motion.div className="sm:hidden">
+              <Avatar className="w-8 h-8">
+                <AvatarImage src={user.user_metadata?.avatar_url} />
+                <AvatarFallback className="bg-white/20 text-white text-xs">
+                  {user.user_metadata?.full_name ? getInitials(user.user_metadata.full_name) : 
+                   user.email ? user.email[0].toUpperCase() : 'U'}
+                </AvatarFallback>
+              </Avatar>
             </motion.div>
           )}
           
@@ -128,21 +91,9 @@ const TodoHeader = () => {
             whileHover={{ scale: 1.1, rotate: -5 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleSignOut}
-            style={{
-              background: 'rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '2px solid rgba(255,255,255,0.2)',
-              padding: '12px',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              color: 'rgba(255,82,82,0.8)',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-              transition: 'all 0.3s ease'
-            }}
+            className="bg-white/10 backdrop-blur-sm border-2 border-white/20 p-2 sm:p-3 rounded-lg sm:rounded-xl cursor-pointer flex items-center text-red-400 shadow-lg hover:bg-white/20 transition-all duration-300"
           >
-            <LogOut size={20} />
+            <LogOut size={16} className="sm:w-5 sm:h-5" />
           </motion.button>
         </motion.div>
       </div>

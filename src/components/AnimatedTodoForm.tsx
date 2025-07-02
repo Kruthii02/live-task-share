@@ -45,139 +45,76 @@ const AnimatedTodoForm = ({ onSubmit, taskType }: AnimatedTodoFormProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
+      className="w-full"
     >
       <motion.h3
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        style={{
-          fontSize: '20px',
-          fontWeight: 'bold',
-          color: 'var(--text-color)',
-          marginBottom: '20px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}
+        className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-5 flex items-center gap-2"
       >
         {taskType === 'personal' ? (
-          <Sparkles size={20} style={{ color: 'var(--accent-color)' }} />
+          <Sparkles size={18} className="sm:w-5 sm:h-5 text-yellow-300" />
         ) : (
-          <Users size={20} style={{ color: 'var(--accent-color)' }} />
+          <Users size={18} className="sm:w-5 sm:h-5 text-blue-300" />
         )}
-        Add New {taskType === 'personal' ? 'Personal' : 'Shared'} Task
+        <span className="text-sm sm:text-base">
+          Add New {taskType === 'personal' ? 'Personal' : 'Shared'} Task
+        </span>
       </motion.h3>
       
       <motion.form
         onSubmit={handleSubmit}
-        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+        className="flex flex-col gap-3 sm:gap-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
         <motion.input
-          whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+          whileFocus={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Task title..."
-          style={{
-            padding: '16px 20px',
-            border: '2px solid transparent',
-            borderRadius: '12px',
-            fontSize: '14px',
-            background: 'rgba(255,255,255,0.8)',
-            backdropFilter: 'blur(10px)',
-            color: 'var(--text-color)',
-            outline: 'none',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-          }}
+          className="w-full py-3 px-4 sm:py-4 sm:px-5 border-2 border-transparent rounded-lg sm:rounded-xl text-sm sm:text-base bg-white/80 backdrop-blur-sm text-gray-800 outline-none transition-all duration-300 shadow-md placeholder:text-gray-500"
         />
         
         <motion.textarea
-          whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+          whileFocus={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Task description (optional)..."
           rows={3}
-          style={{
-            padding: '16px 20px',
-            border: '2px solid transparent',
-            borderRadius: '12px',
-            fontSize: '14px',
-            background: 'rgba(255,255,255,0.8)',
-            backdropFilter: 'blur(10px)',
-            color: 'var(--text-color)',
-            outline: 'none',
-            resize: 'vertical',
-            fontFamily: 'inherit',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-          }}
+          className="w-full py-3 px-4 sm:py-4 sm:px-5 border-2 border-transparent rounded-lg sm:rounded-xl text-sm sm:text-base bg-white/80 backdrop-blur-sm text-gray-800 outline-none resize-vertical font-inherit transition-all duration-300 shadow-md placeholder:text-gray-500"
         />
         
         {taskType === 'personal' && (
           <motion.input
-            whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+            whileFocus={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
             type="datetime-local"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
             placeholder="Due date (optional)..."
-            style={{
-              padding: '16px 20px',
-              border: '2px solid transparent',
-              borderRadius: '12px',
-              fontSize: '14px',
-              background: 'rgba(255,255,255,0.8)',
-              backdropFilter: 'blur(10px)',
-              color: 'var(--text-color)',
-              outline: 'none',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-            }}
+            className="w-full py-3 px-4 sm:py-4 sm:px-5 border-2 border-transparent rounded-lg sm:rounded-xl text-sm sm:text-base bg-white/80 backdrop-blur-sm text-gray-800 outline-none transition-all duration-300 shadow-md"
           />
         )}
         
         {taskType === 'shared' && (
           <motion.input
-            whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+            whileFocus={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
             type="text"
             value={sharedWith}
             onChange={(e) => setSharedWith(e.target.value)}
             placeholder="Share with (comma-separated emails)..."
-            style={{
-              padding: '16px 20px',
-              border: '2px solid transparent',
-              borderRadius: '12px',
-              fontSize: '14px',
-              background: 'rgba(255,255,255,0.8)',
-              backdropFilter: 'blur(10px)',
-              color: 'var(--text-color)',
-              outline: 'none',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-            }}
+            className="w-full py-3 px-4 sm:py-4 sm:px-5 border-2 border-transparent rounded-lg sm:rounded-xl text-sm sm:text-base bg-white/80 backdrop-blur-sm text-gray-800 outline-none transition-all duration-300 shadow-md placeholder:text-gray-500"
           />
         )}
         
         <motion.select
-          whileFocus={{ scale: 1.02, borderColor: 'var(--primary-color)' }}
+          whileFocus={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
-          style={{
-            padding: '16px 20px',
-            border: '2px solid transparent',
-            borderRadius: '12px',
-            fontSize: '14px',
-            background: 'rgba(255,255,255,0.8)',
-            backdropFilter: 'blur(10px)',
-            color: 'var(--text-color)',
-            outline: 'none',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.05)'
-          }}
+          className="w-full py-3 px-4 sm:py-4 sm:px-5 border-2 border-transparent rounded-lg sm:rounded-xl text-sm sm:text-base bg-white/80 backdrop-blur-sm text-gray-800 outline-none cursor-pointer transition-all duration-300 shadow-md"
         >
           <option value="low">🟢 Low Priority</option>
           <option value="medium">🟡 Medium Priority</option>
@@ -191,33 +128,19 @@ const AnimatedTodoForm = ({ onSubmit, taskType }: AnimatedTodoFormProps) => {
           whileTap={{ scale: 0.98 }}
           animate={isSubmitting ? { scale: [1, 1.05, 1] } : {}}
           transition={{ duration: 0.2 }}
-          style={{
-            padding: '16px 20px',
-            background: isSubmitting 
-              ? 'linear-gradient(135deg, var(--accent-color), var(--primary-color))'
-              : 'linear-gradient(135deg, var(--primary-color), var(--accent-color))',
-            color: 'white',
-            border: 'none',
-            borderRadius: '12px',
-            fontSize: '14px',
-            fontWeight: '600',
-            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            boxShadow: '0 4px 20px rgba(47,128,237,0.3)',
-            backdropFilter: 'blur(10px)',
-            transition: 'all 0.3s ease'
-          }}
+          className={`w-full py-3 px-4 sm:py-4 sm:px-5 bg-gradient-to-r from-blue-500 to-green-500 text-white border-none rounded-lg sm:rounded-xl text-sm sm:text-base font-semibold cursor-pointer flex items-center justify-center gap-2 shadow-lg backdrop-blur-sm transition-all duration-300 ${
+            isSubmitting ? 'cursor-not-allowed opacity-80' : 'hover:shadow-xl'
+          }`}
         >
           <motion.div
             animate={isSubmitting ? { rotate: 360 } : { rotate: 0 }}
             transition={{ duration: 0.5, repeat: isSubmitting ? Infinity : 0 }}
           >
-            <Plus size={16} />
+            <Plus size={16} className="sm:w-4 sm:h-4" />
           </motion.div>
-          {isSubmitting ? 'Adding Task...' : 'Add Task'}
+          <span className="text-sm sm:text-base">
+            {isSubmitting ? 'Adding Task...' : 'Add Task'}
+          </span>
         </motion.button>
       </motion.form>
     </motion.div>
