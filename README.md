@@ -8,8 +8,8 @@ A full-stack task management application built using the **MERN stack** with rea
 
 ## 🎥 Demo Videos
 
-- 🔷 **Frontend Demo Video:** [Watch here](https://your-demo-link-frontend.com)
-- 🔷 **Backend Demo Video:** [Watch here](https://your-demo-link-backend.com)
+- 🔷 **Frontend Demo Video:** [Watch here]()
+- 🔷 **Backend Demo Video:** [Watch here]([https://your-demo-link-backend.com](https://github.com/Kruthii02/live-task-share/blob/main/Screen%20Recording%202025-07-02%20073933.mp4))
 
 ---
 
