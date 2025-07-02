@@ -57,7 +57,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signUp = async (email: string, password: string, fullName?: string) => {
-    const redirectUrl = `${window.location.origin}/`;
+    // Use the correct production URL for Vercel deployment
+    const redirectUrl = window.location.hostname === 'localhost' 
+      ? `${window.location.origin}/`
+      : 'https://live-task-share-kruthika-ks-projects.vercel.app/';
     
     const { error } = await supabase.auth.signUp({
       email,
@@ -75,7 +78,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signInWithProvider = async (provider: 'google' | 'github' | 'facebook') => {
-    const redirectUrl = `${window.location.origin}/`;
+    // Use the correct production URL for Vercel deployment
+    const redirectUrl = window.location.hostname === 'localhost' 
+      ? `${window.location.origin}/`
+      : 'https://live-task-share-kruthika-ks-projects.vercel.app/';
     
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
