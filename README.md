@@ -15,7 +15,7 @@ A full-stack task management application built using the **MERN stack** with rea
 
 ## 🧠 Architecture Diagram
 
-![Architecture Diagram](C:\Users\kruth\Downloads\Architecture.png.jpg)
+![Architecture Diagram]([C:\Users\kruth\Downloads\Architecture.png.jpg](https://github.com/Kruthii02/live-task-share/blob/main/WhatsApp%20Image%202025-07-01%20at%2016.26.19_453a541b.jpg))
 
 > ✅ Make sure to add the `architecture.png` inside a folder named `assets` in your repo.
 
