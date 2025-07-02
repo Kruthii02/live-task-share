@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { User, Settings, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import AnimatedThemeToggle from './AnimatedThemeToggle';
@@ -66,7 +66,7 @@ const TodoHeader = () => {
               boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
             }}
           >
-            T
+            ✓
           </motion.div>
           <motion.h1
             initial={{ opacity: 0 }}
@@ -80,7 +80,7 @@ const TodoHeader = () => {
               textShadow: '0 2px 10px rgba(0,0,0,0.2)'
             }}
           >
-            CollabTodo
+            TickMate
           </motion.h1>
         </motion.div>
 
@@ -123,26 +123,6 @@ const TodoHeader = () => {
           )}
           
           <AnimatedThemeToggle />
-          
-          <motion.button
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            whileTap={{ scale: 0.9 }}
-            style={{
-              background: 'rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '2px solid rgba(255,255,255,0.2)',
-              padding: '12px',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              color: 'rgba(255,255,255,0.8)',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-              transition: 'all 0.3s ease'
-            }}
-          >
-            <Settings size={20} />
-          </motion.button>
           
           <motion.button
             whileHover={{ scale: 1.1, rotate: -5 }}

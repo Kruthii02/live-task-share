@@ -1,54 +1,94 @@
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTasks } from '@/hooks/useTasks';
+import { useSharedTasks } from '@/hooks/useSharedTasks';
 import TodoHeader from '../components/TodoHeader';
 import AnimatedTodoForm from '../components/AnimatedTodoForm';
 import AnimatedTodoList from '../components/AnimatedTodoList';
 import AnimatedTodoFilters from '../components/AnimatedTodoFilters';
-import { toast } from "@/components/ui/sonner";
 
 const Index = () => {
-  const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
+  const [taskType, setTaskType] = useState<'personal' | 'shared'>('personal');
   const { user } = useAuth();
+  const { tasks, addTask, updateTask, deleteTask, toggleTaskStatus } = useTasks();
+  const { sharedTasks, addSharedTask, updateSharedTask, deleteSharedTask } = useSharedTasks();
 
-  const addTask = (taskData) => {
-    const newTask = {
-      id: Date.now(),
-      title: taskData.title,
-      description: taskData.description,
-      priority: taskData.priority || 'medium',
-      completed: false,
-      createdAt: new Date().toISOString(),
-      userId: user?.id,
-      shared: false,
-      collaborators: []
-    };
-    
-    setTasks(prev => [newTask, ...prev]);
-    toast("✨ Task created successfully!");
+  const handleAddTask = async (taskData: any) => {
+    if (taskType === 'personal') {
+      await addTask({
+        title: taskData.title,
+        description: taskData.description,
+        due_date: taskData.due_date
+      });
+    } else {
+      await addSharedTask({
+        task_title: taskData.title,
+        task_description: taskData.description,
+        shared_with: taskData.shared_with || []
+      });
+    }
   };
 
-  const updateTask = (taskId, updates) => {
-    setTasks(prev => prev.map(task => 
-      task.id === taskId ? { ...task, ...updates } : task
-    ));
-    toast("📝 Task updated!");
+  const handleUpdateTask = async (taskId: string, updates: any) => {
+    if (taskType === 'personal') {
+      await updateTask(taskId, updates);
+    } else {
+      await updateSharedTask(taskId, updates);
+    }
   };
 
-  const deleteTask = (taskId) => {
-    setTasks(prev => prev.filter(task => task.id !== taskId));
-    toast("🗑️ Task deleted!");
+  const handleDeleteTask = async (taskId: string) => {
+    if (taskType === 'personal') {
+      await deleteTask(taskId);
+    } else {
+      await deleteSharedTask(taskId);
+    }
   };
 
-  const toggleComplete = (taskId) => {
-    setTasks(prev => prev.map(task => 
-      task.id === taskId ? { ...task, completed: !task.completed } : task
-    ));
+  const handleToggleComplete = async (taskId: string) => {
+    if (taskType === 'personal') {
+      await toggleTaskStatus(taskId);
+    } else {
+      const task = sharedTasks.find(t => t.id === taskId);
+      if (task) {
+        const newStatus = task.status === 'completed' ? 'pending' : 'completed';
+        await updateSharedTask(taskId, { status: newStatus });
+      }
+    }
   };
 
-  const filteredTasks = tasks.filter(task => {
+  // Convert database tasks to component format
+  const currentTasks = taskType === 'personal' 
+    ? tasks.map(task => ({
+        id: task.id,
+        title: task.title,
+        description: task.description || '',
+        priority: 'medium',
+        completed: task.status === 'completed',
+        createdAt: task.created_at,
+        userId: task.user_id,
+        shared: false,
+        collaborators: [],
+        status: task.status,
+        due_date: task.due_date
+      }))
+    : sharedTasks.map(task => ({
+        id: task.id,
+        title: task.task_title,
+        description: task.task_description || '',
+        priority: 'medium',
+        completed: task.status === 'completed',
+        createdAt: task.created_at,
+        userId: task.created_by,
+        shared: true,
+        collaborators: task.shared_with || [],
+        status: task.status
+      }));
+
+  const filteredTasks = currentTasks.filter(task => {
     switch(filter) {
       case 'completed':
         return task.completed;
@@ -105,7 +145,53 @@ const Index = () => {
             transition: 'all 0.3s ease'
           }}
         >
-          <AnimatedTodoForm onSubmit={addTask} />
+          {/* Task Type Toggle */}
+          <div style={{ marginBottom: '24px' }}>
+            <div style={{
+              display: 'flex',
+              gap: '8px',
+              background: 'rgba(255,255,255,0.1)',
+              padding: '4px',
+              borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.2)'
+            }}>
+              <button
+                onClick={() => setTaskType('personal')}
+                style={{
+                  flex: 1,
+                  padding: '12px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  background: taskType === 'personal' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                  color: 'white',
+                  fontWeight: taskType === 'personal' ? 'bold' : 'normal',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Personal
+              </button>
+              <button
+                onClick={() => setTaskType('shared')}
+                style={{
+                  flex: 1,
+                  padding: '12px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  background: taskType === 'shared' ? 'rgba(255,255,255,0.2)' : 'transparent',
+                  color: 'white',
+                  fontWeight: taskType === 'shared' ? 'bold' : 'normal',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Shared
+              </button>
+            </div>
+          </div>
+
+          <AnimatedTodoForm onSubmit={handleAddTask} taskType={taskType} />
+          
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -116,10 +202,10 @@ const Index = () => {
               currentFilter={filter} 
               onFilterChange={setFilter}
               taskCounts={{
-                all: tasks.length,
-                completed: tasks.filter(t => t.completed).length,
-                pending: tasks.filter(t => !t.completed).length,
-                shared: tasks.filter(t => t.shared).length
+                all: currentTasks.length,
+                completed: currentTasks.filter(t => t.completed).length,
+                pending: currentTasks.filter(t => !t.completed).length,
+                shared: currentTasks.filter(t => t.shared).length
               }}
             />
           </motion.div>
@@ -163,15 +249,15 @@ const Index = () => {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent'
             }}>
-              Your Tasks ({filteredTasks.length})
+              {taskType === 'personal' ? 'Your Tasks' : 'Shared Tasks'} ({filteredTasks.length})
             </h2>
           </motion.div>
           
           <AnimatedTodoList 
             tasks={filteredTasks}
-            onToggleComplete={toggleComplete}
-            onUpdate={updateTask}
-            onDelete={deleteTask}
+            onToggleComplete={handleToggleComplete}
+            onUpdate={handleUpdateTask}
+            onDelete={handleDeleteTask}
           />
         </motion.div>
       </motion.div>
